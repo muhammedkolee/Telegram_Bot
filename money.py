@@ -24,7 +24,7 @@ def para(num = 0):
                 result += f"1$ = {(dolar['result']['data'][-4]['rate'])}₺\n"
 
             else:
-                return "Bugünlük API hakkı dolmuştur."
+                return "Döviz kuru için bugünlük API hakkı dolmuştur.\n"
 
 
             conn.request("GET", f"/economy/currencyToAll?int={num}&base=EUR", headers=headers)
@@ -38,7 +38,7 @@ def para(num = 0):
                 result += f"1€ = {(euro['result']['data'][-5]['rate'])}₺\n"
 
             else:
-                return "Bugünlük API hakkı dolmuştur."
+                return "Döviz kuru için bugünlük API hakkı dolmuştur.\n"
 
             conn.request("GET", f"/economy/currencyToAll?int={num}&base=RUB", headers=headers)
 
@@ -51,8 +51,9 @@ def para(num = 0):
                 result += f"1₽ = {str(ruble['result']['data'][-5]['rate'])}₺"
 
             else:
-                return "Bugünlük API hakkı dolmuştur."
+                return "Döviz kuru için bugünlük API hakkı dolmuştur.\n"
 
+            return result
 
         else:
             conn.request("GET", f"/economy/currencyToAll?int={num}&base=USD", headers=headers)
@@ -67,7 +68,7 @@ def para(num = 0):
                 result += f"{num}$ = {(usd['result']['data'][-4]['calculatedstr'])}₺\n"
 
             else:
-                return "Bugünlük API hakkı dolmuştur."
+                return "Döviz kuru için bugünlük API hakkı dolmuştur.\n"
 
             conn.request("GET", f"/economy/currencyToAll?int={num}&base=EUR", headers=headers)
 
@@ -80,7 +81,7 @@ def para(num = 0):
                 result += f"{num}€ = {(eur['result']['data'][-5]['calculatedstr'])}₺\n"
 
             else:
-                return "Bugünlük API hakkı dolmuştur."
+                return "Döviz kuru için bugünlük API hakkı dolmuştur.\n"
 
             conn.request("GET", f"/economy/currencyToAll?int={num}&base=RUB", headers=headers)
 
@@ -93,8 +94,9 @@ def para(num = 0):
                 result += f"{num}₽ = {str(rub['result']['data'][-5]['calculatedstr'])}₺\n\n"
 
             else:
-                return "Bugünlük API hakkı dolmuştur."
-    
+                return "Döviz kuru için bugünlük API hakkı dolmuştur.\n"
+
+            return result
 
     def gold():
 
@@ -102,11 +104,16 @@ def para(num = 0):
         res = conn.getresponse()
         data = res.read()
         veri = json.loads(data)
+        result = ""
 
-        for i in range(6):
-            result += f"{veri['result'][i]['name']}\nAlış: {veri['result'][i]['buying']}\nSatış: {veri['result'][i]['selling']}\n"
+        if veri['success'] == 'True':
+            for i in range(6):
+                result += f"{veri['result'][i]['name']}\nAlış: {veri['result'][i]['buying']}\nSatış: {veri['result'][i]['selling']}\n"
+            return result
+        
+        else:
+            return "Altın fiyatları için bugünlük API hakkı dolmuştur."
 
 
-    mny()
-    gold()
-para()
+    return f"{mny()}{gold()}"
+print(para())
