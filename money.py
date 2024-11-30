@@ -116,4 +116,3 @@ def para(num = 0):
 
 
     return f"{mny()}{gold()}"
-print(para())

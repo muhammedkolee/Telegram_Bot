@@ -2,6 +2,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
 import weather as w
 import money as m
+import namaz as n
 
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -62,6 +63,21 @@ async def currency(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except:
         await update.message.reply_text(f"Bir hata meydana geldi! Lütfen bilgileri doğru girdiğinizden emin olun.")
 
+async def namaz(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        if not context.args:
+            await update.message.reply_text(f"Lütfen şehir ismi giriniz! -> /namaz [sehir_ismi]")
+        
+        elif not not context.args:
+            if len(context.args) != 1:
+                await update.message.reply_text(f"Birden fazla değer girişi oldu!")
+
+            else:
+                value = context.args
+                await update.message.reply_text(n.vakit(str(value[0])))
+
+    except:
+        pass
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token('7322934392:AAHicDOumOq6XCDKk5r-NSnOk2rzmqdn2Jw').build()
@@ -71,11 +87,13 @@ if __name__ == '__main__':
     weather_handler = CommandHandler("weather", weather)
     currency_handler = CommandHandler("currency", currency)
     help_handler = CommandHandler("help", help)
+    namaz_handler = CommandHandler("namaz", namaz)
 
     application.add_handler(greeting_handler)
     application.add_handler(topla_handler)
     application.add_handler(weather_handler)
     application.add_handler(currency_handler)
     application.add_handler(help_handler)
+    application.add_handler(namaz_handler)
 
     application.run_polling()
