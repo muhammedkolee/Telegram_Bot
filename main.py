@@ -3,6 +3,7 @@ from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
 import weather as w
 import money as m
 import namaz as n
+import todo as t
 
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -77,7 +78,17 @@ async def namaz(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await update.message.reply_text(n.vakit(str(value[0])))
 
     except:
-        pass
+        await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
+
+async def todo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        if not context.args:
+            await update.message.reply_text(f"Komut alındı!")
+
+        else:
+            await update.message.reply_text(f"Lütfen komuttan sonra değer girmeyiniz!!")
+    except:
+        await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token('7322934392:AAHicDOumOq6XCDKk5r-NSnOk2rzmqdn2Jw').build()
@@ -88,6 +99,7 @@ if __name__ == '__main__':
     currency_handler = CommandHandler("currency", currency)
     help_handler = CommandHandler("help", help)
     namaz_handler = CommandHandler("namaz", namaz)
+    todo_handler = CommandHandler("todo", todo)
 
     application.add_handler(greeting_handler)
     application.add_handler(topla_handler)
@@ -95,5 +107,6 @@ if __name__ == '__main__':
     application.add_handler(currency_handler)
     application.add_handler(help_handler)
     application.add_handler(namaz_handler)
+    application.add_handler(todo_handler)
 
     application.run_polling()
