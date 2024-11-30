@@ -28,4 +28,3 @@ def run2():
 
 while True:
     run2()
-    time.sleep(1)
