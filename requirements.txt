@@ -1,0 +1,5 @@
+python-telegram-bot
+logging
+json
+http.client
+requests
