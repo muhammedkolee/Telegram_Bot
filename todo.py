@@ -17,7 +17,6 @@ def run():
 
     while(True):
         s.run_pending()
-        time.sleep(1)
 
 def run2():
     def jobs():

@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
 import weather as w
 import money as m
 import namaz as n
-import todo as t
+# import todo as t
 
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -41,8 +41,6 @@ async def topla(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def weather(update: Update, context: ContextTypes.DEFAULT_TYPE):
     value = context.args
     try:
-        print(value)
-        print(value[0])
         await update.message.reply_text(w.hava(str(value[0])))
 
     except:

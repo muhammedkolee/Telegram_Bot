@@ -24,7 +24,6 @@ def hava(city):
 
     result = ""
 
-    print(f"{city.capitalize()} şehri için 7 günlük hava durumu:")
     for i in range(0,7):
         result += f"{veri['result'][i]['date']} {veri['result'][i]['day']} {int(float(veri['result'][i]['degree']))}° hava {veri['result'][i]['description']}\n\n"
 
