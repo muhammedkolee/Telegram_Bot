@@ -86,15 +86,15 @@ async def namaz(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 # async def todo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    try:
-        if not context.args:
-            await update.message.reply_text(f"Komut alındı!")
-            await update.message.reply_text(t.run_schedule())
+    # try:
+    #     if not context.args:
+    #         await update.message.reply_text(f"Komut alındı!")
+    #         await update.message.reply_text(t.run_schedule())
 
-        else:
-            await update.message.reply_text(f"Lütfen komuttan sonra değer girmeyiniz!!")
-    except:
-        await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
+    #     else:
+    #         await update.message.reply_text(f"Lütfen komuttan sonra değer girmeyiniz!!")
+    # except:
+    #     await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token('7322934392:AAHicDOumOq6XCDKk5r-NSnOk2rzmqdn2Jw').build()
