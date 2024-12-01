@@ -3,6 +3,7 @@ from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
 import weather as w
 import money as m
 import namaz as n
+import token_bot as t
 # import todo as t
 
 
@@ -85,6 +86,7 @@ async def namaz(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except:
         await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
+
 # async def todo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # try:
     #     if not context.args:
@@ -97,7 +99,7 @@ async def namaz(update: Update, context: ContextTypes.DEFAULT_TYPE):
     #     await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token('7322934392:AAHicDOumOq6XCDKk5r-NSnOk2rzmqdn2Jw').build()
+    application = ApplicationBuilder().token(t.bot_token).build()
     
     greeting_handler = CommandHandler('greeting', greeting)
     topla_handler = CommandHandler('topla', topla)
