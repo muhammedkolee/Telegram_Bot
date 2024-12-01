@@ -8,6 +8,9 @@ import namaz as n
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"""
+/greeting
+Selamlama                                    
+
 /topla [sayi1] [sayi2] 
 Verilen iki sayının toplamını döndürür.
                             
@@ -19,6 +22,9 @@ Anlık döviz kurlarını gösterir.
                             
 /currency [sayı]
 Girilen sayıyı döviz kuru olarak hesaplar.
+                                    
+/namaz [sehir_ismi]
+Girilen şehrin o günlük namaz vakitlerini döndürür.                                    
                                     """)
 
 
@@ -62,6 +68,7 @@ async def currency(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except:
         await update.message.reply_text(f"Bir hata meydana geldi! Lütfen bilgileri doğru girdiğinizden emin olun.")
 
+
 async def namaz(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         if not context.args:
@@ -79,14 +86,15 @@ async def namaz(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 # async def todo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-#     try:
-#         if not context.args:
-#             await update.message.reply_text(f"Komut alındı!")
+    try:
+        if not context.args:
+            await update.message.reply_text(f"Komut alındı!")
+            await update.message.reply_text(t.run_schedule())
 
-#         else:
-#             await update.message.reply_text(f"Lütfen komuttan sonra değer girmeyiniz!!")
-#     except:
-#         await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
+        else:
+            await update.message.reply_text(f"Lütfen komuttan sonra değer girmeyiniz!!")
+    except:
+        await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token('7322934392:AAHicDOumOq6XCDKk5r-NSnOk2rzmqdn2Jw').build()
