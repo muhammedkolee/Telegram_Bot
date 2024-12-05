@@ -88,10 +88,10 @@ async def namaz(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 
-async def football(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def futbol(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
-        await update.message.reply_text(f.soccer)
-    except:
+        await update.message.reply_text(f.soccer())
+    except Exception as e:
         await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 # async def todo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -114,7 +114,7 @@ if __name__ == '__main__':
     currency_handler = CommandHandler("currency", currency)
     help_handler = CommandHandler("help", help)
     namaz_handler = CommandHandler("namaz", namaz)
-    footbal_handler = CommandHandler("football", football)
+    footbal_handler = CommandHandler("football", futbol)
     # todo_handler = CommandHandler("todo", todo)
 
     application.add_handler(greeting_handler)

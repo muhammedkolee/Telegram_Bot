@@ -17,7 +17,7 @@ def soccer():
 
     result = ""
 
-    for i in range(len(veri['result'][i])):
+    for i in range(len(veri['result'])):
         if str(veri['success']) != 'True':
             result += "Bugünlük API hakkı dolmuştur. Lütfen farklı bir zamanda tekrar deneyiniz!"
             return result
@@ -30,3 +30,5 @@ def soccer():
                 result += f"{str(veri['result'][i]['home'])} {str(veri['result'][i]['skor'])} {str(veri['result'][i]['away'])}\n\n"
 
     return result
+
+print(soccer())
