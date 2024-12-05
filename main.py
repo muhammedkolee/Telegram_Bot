@@ -4,6 +4,7 @@ import weather as w
 import money as m
 import namaz as n
 import token_bot as t
+import football as f
 # import todo as t
 
 
@@ -87,6 +88,12 @@ async def namaz(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 
+async def football(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        await update.message.reply_text(f.soccer)
+    except:
+        await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
+
 # async def todo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # try:
     #     if not context.args:
@@ -107,6 +114,7 @@ if __name__ == '__main__':
     currency_handler = CommandHandler("currency", currency)
     help_handler = CommandHandler("help", help)
     namaz_handler = CommandHandler("namaz", namaz)
+    footbal_handler = CommandHandler("football", football)
     # todo_handler = CommandHandler("todo", todo)
 
     application.add_handler(greeting_handler)
@@ -115,6 +123,7 @@ if __name__ == '__main__':
     application.add_handler(currency_handler)
     application.add_handler(help_handler)
     application.add_handler(namaz_handler)
+    application.add_handler(footbal_handler)
     # application.add_handler(todo_handler)
 
     application.run_polling()
