@@ -1,4 +1,4 @@
-def calculate(height, weight):   
+def calculater(height, weight):   
     return (weight/(height**2))
 
 def data(height, weight):
@@ -8,7 +8,7 @@ def data(height, weight):
     if(height <= 0) or (weight <= 0):
         return f"Incorrect information entry, try again!"
     
-    value = calculate(height, weight)
+    value = calculater(height, weight)
     print(value)
     
     if(value < 18.5):
@@ -25,4 +25,3 @@ def data(height, weight):
         
     else:
         return f"Incorrect information entry, try again."
-    

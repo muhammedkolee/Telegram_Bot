@@ -4,7 +4,7 @@ import weather as w
 import money as m
 import namaz as n
 import football as f
-# import bmi as b
+import bmi as b
 # import todo as t
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -25,7 +25,10 @@ Anlık döviz kurlarını gösterir.
 Girilen sayıyı döviz kuru olarak hesaplar.
                                     
 /namaz [sehir_ismi]
-Girilen şehrin o günlük namaz vakitlerini döndürür.                                    
+Girilen şehrin o günlük namaz vakitlerini döndürür.
+
+/bmi [boy] [kilo]
+Boy ve kilo bilgilerine göre Vücut Kitle İndeksini hesaplar ve sağlıklı olup olmadığınızı söyler.                                    
                                     """)
 
 
@@ -94,23 +97,23 @@ async def futbol(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 
-# async def bmi(update: Update, context: ContextTypes.DEFAULT_TYPE):
-#     try:
-#         if not context.args:
-#             await update.message.reply_text(f"Lütfen sırasıyla boy ve kilo değerlerini giriniz. -> /bmi [boy] [kilo]")
+async def bmi(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        if not context.args:
+            await update.message.reply_text(f"Lütfen sırasıyla boy ve kilo değerlerini giriniz. -> /bmi [boy] [kilo]")
         
-#         elif not not context.args:
-#             if len(context.args) != 2:
-#                 await update.message.reply_text(f"Lütfen boy ve kilo değerleri girdiğinizden emin olun. -> /bmi [boy] [kilo]")
-#             elif len(context.args) == 2:
-#                 value = context.args
-#                 print(value[0])
-#                 print(value[1])
-#                 await update.message.reply_text(data1(value[0], value[1]))
-#             else:
-#                 await update.message.reply_text(f"Bilinmeyen bir hata meydana geldi, lütfen tekrar deneyiniz. -> /bmi [boy] [kilo]")
-#     except:
-#         await update.message.reply_text(f"Bilinmeyen bir hata meydana geldi! Lütfen tekrar deneyiniz. -> /bmi [boy] [kilo]")
+        elif not not context.args:
+            if len(context.args) != 2:
+                await update.message.reply_text(f"Lütfen boy ve kilo değerleri girdiğinizden emin olun. -> /bmi [boy] [kilo]")
+            elif len(context.args) == 2:
+                value = context.args
+                print(value[0])
+                print(value[1])
+                await update.message.reply_text(b.data(int(value[0]), int(value[1])))
+            else:
+                await update.message.reply_text(f"Bilinmeyen bir hata meydana geldi, lütfen tekrar deneyiniz. -> /bmi [boy] [kilo]")
+    except Exception as a:
+        await update.message.reply_text(f"Bilinmeyen bir hata meydana geldi! Lütfen tekrar deneyiniz. -> /bmi [boy] [kilo]\n{a}")
         
 
 
@@ -128,7 +131,7 @@ async def futbol(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token("7322934392:AAHusoJDqdXyBHnDPSYvxKGOixa8YAAuZxo").build()
-    
+
     greeting_handler = CommandHandler('greeting', greeting)
     topla_handler = CommandHandler('topla', topla)
     weather_handler = CommandHandler("weather", weather)
@@ -136,7 +139,7 @@ if __name__ == '__main__':
     help_handler = CommandHandler("help", help)
     namaz_handler = CommandHandler("namaz", namaz)
     footbal_handler = CommandHandler("football", futbol)
-    # bmi_handler = CommandHandler("bmi", bmi)
+    bmi_handler = CommandHandler("bmi", bmi)
     # todo_handler = CommandHandler("todo", todo)
 
     application.add_handler(greeting_handler)
@@ -146,7 +149,7 @@ if __name__ == '__main__':
     application.add_handler(help_handler)
     application.add_handler(namaz_handler)
     application.add_handler(footbal_handler)
-    # application.add_handler(bmi_handler)
+    application.add_handler(bmi_handler)
     # application.add_handler(todo_handler)
 
     application.run_polling()

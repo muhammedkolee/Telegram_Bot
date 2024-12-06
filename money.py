@@ -9,7 +9,6 @@ def para(num = 0):
         'authorization': "apikey 5oGAiwnuaBuT0Ghvkoty59:7hXU2RIQRKz3T01zv33R1X"
         }
 
-
     def mny():
         if num == 0:
             conn.request("GET", f"/economy/currencyToAll?int={num}&base=USD", headers=headers)
@@ -115,4 +114,4 @@ def para(num = 0):
             return "Altın fiyatları için bugünlük API hakkı dolmuştur."
 
 
-    return f"{mny()}{gold()}"
+    return f"{mny()}\n\n{gold()}"
