@@ -30,5 +30,3 @@ def soccer():
                 result += f"{str(veri['result'][i]['home'])} {str(veri['result'][i]['skor'])} {str(veri['result'][i]['away'])}\n\n"
 
     return result
-
-print(soccer())
