@@ -6,7 +6,7 @@ def vakit(city = "cankiri"):
 
     headers = {
         'content-type': "application/json",
-        'authorization': "apikey 5oGAiwnuaBuT0Ghvkoty59:7hXU2RIQRKz3T01zv33R1X"
+        'authorization': "apikey"
         }
 
     conn.request("GET", f"/pray/all?data.city={city}", headers=headers)
@@ -20,7 +20,6 @@ def vakit(city = "cankiri"):
     if str(veri['success']) == 'True':
         for i in range(6):
             result += f"{veri['result'][i]['vakit']}: {veri['result'][i]['saat']}\n"
-        return result
-    
+        return result   
     else:
         return "Namaz vakti için bugünlük API hakkı dolmuştur."

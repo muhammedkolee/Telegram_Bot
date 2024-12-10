@@ -5,7 +5,6 @@ import money as m
 import namaz as n
 import football as f
 import bmi as b
-# import todo as t
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"""
@@ -90,9 +89,16 @@ async def namaz(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
 
-async def futbol(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def football(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         await update.message.reply_text(f.soccer())
+    except Exception as e:
+        await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
+
+
+async def lig(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        await update.message.reply_text(f.league())
     except Exception as e:
         await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
 
@@ -100,11 +106,10 @@ async def futbol(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def bmi(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         if not context.args:
-            await update.message.reply_text(f"Lütfen sırasıyla boy ve kilo değerlerini giriniz. -> /bmi [boy] [kilo]")
-        
+            await update.message.reply_text(f"Lütfen sırasıyla boy ve kilo değerlerini giriniz. -> /bmi [boy] [kilo]")        
         elif not not context.args:
             if len(context.args) != 2:
-                await update.message.reply_text(f"Lütfen boy ve kilo değerleri girdiğinizden emin olun. -> /bmi [boy] [kilo]")
+                await update.message.reply_text(f"Lütfen boy ve kilo değerleri girdiğinizden emin olun. -> /bmi [boy] [kilo]")               
             elif len(context.args) == 2:
                 value = context.args
                 print(value[0])
@@ -116,21 +121,8 @@ async def bmi(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"Bilinmeyen bir hata meydana geldi! Lütfen tekrar deneyiniz. -> /bmi [boy] [kilo]\n{a}")
         
 
-
-
-# async def todo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # try:
-    #     if not context.args:
-    #         await update.message.reply_text(f"Komut alındı!")
-    #         await update.message.reply_text(t.run_schedule())
-
-    #     else:
-    #         await update.message.reply_text(f"Lütfen komuttan sonra değer girmeyiniz!!")
-    # except:
-    #     await update.message.reply_text(f"Bir hata meydana geldi. Lütfen tekrar deneyiniz.")
-
 if __name__ == '__main__':
-    application = ApplicationBuilder().token("7322934392:AAHusoJDqdXyBHnDPSYvxKGOixa8YAAuZxo").build()
+    application = ApplicationBuilder().token("bot_token").build()
 
     greeting_handler = CommandHandler('greeting', greeting)
     topla_handler = CommandHandler('topla', topla)
@@ -138,9 +130,9 @@ if __name__ == '__main__':
     currency_handler = CommandHandler("currency", currency)
     help_handler = CommandHandler("help", help)
     namaz_handler = CommandHandler("namaz", namaz)
-    footbal_handler = CommandHandler("football", futbol)
+    footbal_handler = CommandHandler("football", football)
     bmi_handler = CommandHandler("bmi", bmi)
-    # todo_handler = CommandHandler("todo", todo)
+    lig_handler = CommandHandler("lig", lig)
 
     application.add_handler(greeting_handler)
     application.add_handler(topla_handler)
@@ -150,6 +142,6 @@ if __name__ == '__main__':
     application.add_handler(namaz_handler)
     application.add_handler(footbal_handler)
     application.add_handler(bmi_handler)
-    # application.add_handler(todo_handler)
+    application.add_handler(lig_handler)
 
     application.run_polling()

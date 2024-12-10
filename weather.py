@@ -1,14 +1,12 @@
 import http.client
 import json
 
-
-
 def hava(city):
     conn = http.client.HTTPSConnection("api.collectapi.com")
 
     headers = {
         'content-type': "application/json",
-        'authorization': "apikey 5oGAiwnuaBuT0Ghvkoty59:7hXU2RIQRKz3T01zv33R1X"
+        'authorization': "apikey"
         }
 
     lang = "tr"
@@ -17,9 +15,7 @@ def hava(city):
 
     res = conn.getresponse()
     data = res.read()
-
     data = data.decode("utf-8")
-
     veri = json.loads(data)
 
     result = ""
